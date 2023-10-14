@@ -4,7 +4,7 @@
   import thumbnail3 from '$lib/assets/thumbnail-3.jpg'
   import thumbnail4 from '$lib/assets/thumbnail-4.jpeg'
   import thumbnail5 from '$lib/assets/thumbnail-5.png'
-  import mieSetan from '$lib/assets/Mie Setan.jpg'
+  import mieSetan from '$lib/assets/Mie setan.jpg'
   import mieAngel from '$lib/assets/mie angel.jpg'
   import userImg from '$lib/assets/user.jpg'
   import udangRambutan from '$lib/assets/udang rembutan.jpg'
