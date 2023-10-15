@@ -62,7 +62,7 @@
     let email = document.getElementById('exampleInputEmail1').value
     let arr = email.split('@')
     console.log(email.split('@'))
-    user = arr[0]
+    user = email ? arr[0] : 'guest'
     tab = 'buyer'
   }
   function buyerClick() {
