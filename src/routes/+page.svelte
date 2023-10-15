@@ -7,6 +7,7 @@
   import mieSetan from '$lib/assets/Mie setan.jpg'
   import mieAngel from '$lib/assets/mie angel.jpg'
   import userImg from '$lib/assets/user.jpg'
+  import endraImg from '$lib/assets/endra.png'
   import udangRambutan from '$lib/assets/udang rembutan.jpg'
 
   let tab = 'login'
@@ -70,6 +71,12 @@
   }
   function sellerClick() {
     tab = 'seller'
+  }
+  $: countItem = () => {
+    return menus.filter(menu => menu.quantity > 0).length
+  }
+  $: totalItem = () => {
+    return menus.filter(menu => menu.quantity > 0).reduce((total, {quantity, price}) => total + (quantity * price), 0)
   }
 </script>
 <div class="container mt-3">
@@ -139,10 +146,10 @@
           <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px; max-width: 500px">
             <div class="row">
               <div class="col-3">
-                <img src="{userImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
+                <img src="{endraImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
               </div>
               <div class="col-8">
-                <p class="open-order-label">Dany Muhammad G.</p>
+                <p class="open-order-label">Endra Arif</p>
                 <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Restoran: Mie Gacoan</p>
                 <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Tutup order: 14:30</p>
               </div>
@@ -198,7 +205,7 @@
         </div>
       </div>
       <div class="row">
-        {#each orderItems as item}
+        {#each menus.filter((menu) => menu.quantity > 0) as item}
           <div class="col-sm-12 col-md-6">
             <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
               <div class="row">
@@ -218,8 +225,8 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
           <div class="card order-list mb-2 d-flex" style="padding: 4px;border-radius:8px; width: 200px">
-            <p class="open-order-label" style="font-size: 14px;color: white">3 item</p>
-            <p class="open-order-label" style="font-size: 14px;color: white">Rp 120.000</p>
+            <p class="open-order-label" style="font-size: 14px;color: white">{countItem()} item</p>
+            <p class="open-order-label" style="font-size: 14px;color: white">Rp {totalItem()}</p>
           </div>
         </div>
       </div>
