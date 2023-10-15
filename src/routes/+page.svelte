@@ -15,31 +15,31 @@
     {
       buyer: 'Endra Arif',
       shop: 'Mie Gacoan',
-      last_order_at: '09:05',
+      last_order_at: '14:30',
       url: thumbnail1,
     },
     {
       buyer: 'Dima Alam',
       shop: 'Soto Ayam Syahid',
-      last_order_at: '09:05',
+      last_order_at: '14:45',
       url: thumbnail2,
     },
     {
       buyer: 'Dany Muhammad',
       shop: 'Telur Ceplok',
-      last_order_at: '09:05',
+      last_order_at: '15:00',
       url: thumbnail3,
     },
     {
       buyer: 'Amalia',
       shop: 'Ankringan Syahid',
-      last_order_at: '09:05',
+      last_order_at: '13:50',
       url: thumbnail4,
     },
     {
       buyer: 'Arin',
       shop: 'Mie Ayam Papa',
-      last_order_at: '09:05',
+      last_order_at: '14:00',
       url: thumbnail5,
     },
   ]
