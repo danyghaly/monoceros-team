@@ -84,7 +84,7 @@
     <div class="card px-3" style="margin-top: 40px;background-color: #4B92D4; border: 0">
       <div class="d-block" style="margin-left: 46px">
         <h1 class="login-title">UMAI</h1>
-        <span class="login-title" style="font-size: 24px;">COMFORTALE EATING</span>
+        <span class="login-title" style="font-size: 24px;">COMFORTABLE EATING</span>
       </div>
       <form class="my-5">
         <div class="mb-3">
@@ -104,7 +104,7 @@
     <div class="row mb-1">
       <div class="col-6">
         <h1 class="mb-0" style="color: white">UMAI</h1>
-        <span style="font-size: 12px;color: white;">COMFORTALE EATING</span>
+        <span style="font-size: 12px;color: white;">COMFORTABLE EATING</span>
       </div>
       <div class="col-6 d-flex align-items-center" style="justify-content: end; color: white">
         Welcome {user}!
