@@ -51,6 +51,12 @@
   const orderItems = [
     { name: 'Mie Goreng Setan Pangsit', 'price': 34000, 'quantity': 3, url: mieSetan}
   ]
+  function reduceQuantity(order) {
+    if (order.quantity > 0) order.quantity--
+  }
+  function addQuantity(order) {
+    order.quantity++
+  }
   function buyerClick() {
     tab = 'buyer'
   }
@@ -131,7 +137,7 @@
               <div class="col-8">
                 <p class="open-order-label">{item.name}</p>
                 <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
-                <button on:click={() => item.quantity--} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-minus'></i></button>
+                <button on:click={ () => item.quantity > 0 ? item.quantity--:null} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-minus'></i></button>
                 <input type="number" value="{item.quantity}" style="max-width: 50px">
                 <button on:click={() => item.quantity++} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-plus'></i></button>
               </div>
