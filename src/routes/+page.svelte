@@ -43,10 +43,10 @@
     },
   ]
   const menus = [
-    { name: 'Mie Angel', 'price': 9000, url: mieSetan},
-    { name: 'Mie Setan', 'price': 9000, url: mieAngel},
-    { name: 'Mie Iblis', 'price': 9000, url: thumbnail1},
-    { name: 'Udang Rambutan', 'price': 10000, url: udangRambutan},
+    { name: 'Mie Angel', 'price': 9000, url: mieSetan, quantity: 0},
+    { name: 'Mie Setan', 'price': 9000, url: mieAngel, quantity: 0},
+    { name: 'Mie Iblis', 'price': 9000, url: thumbnail1, quantity: 0},
+    { name: 'Udang Rambutan', 'price': 10000, url: udangRambutan, quantity: 0},
   ]
   const orderItems = [
     { name: 'Mie Goreng Setan Pangsit', 'price': 34000, 'quantity': 3, url: mieSetan}
@@ -69,7 +69,12 @@
     </div>
   </div>
   <div class="row mb-1">
-    <div class="col-12" style="display: flex;justify-content: end">
+    <div class="col-6">
+      {#if tab==='join order'}
+      <button on:click={buyerClick} type="button" class="btn btn-close-white" style="border-radius: 100px"><i class='bx bx-chevron-left' ></i>Back</button>
+      {/if}
+    </div>
+    <div class="col-6" style="display: flex;justify-content: end">
       <button on:click={buyerClick} type="button" class="{tab !== 'seller' ? 'btn btn-warning me-1' : 'btn btn-secondary me-1'}" style="border-radius: 100px">Buyer</button>
       <button on:click={sellerClick} type="button" class="{tab === 'seller' ? 'btn btn-warning' : 'btn btn-secondary'}" style="border-radius: 100px">Seller</button>
     </div>
@@ -126,7 +131,9 @@
               <div class="col-8">
                 <p class="open-order-label">{item.name}</p>
                 <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
-                <button class="btn btn-sm btn-light">Tambah</button>
+                <button on:click={() => item.quantity--} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-minus'></i></button>
+                <input type="number" value="{item.quantity}" style="max-width: 50px">
+                <button on:click={() => item.quantity++} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-plus'></i></button>
               </div>
             </div>
           </div>
