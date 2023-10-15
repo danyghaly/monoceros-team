@@ -86,7 +86,7 @@
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label  login-label">Password</label>
-          <input style="border-radius: 100px"type="email" class="form-control" id="exampleInputPassword1">
+          <input style="border-radius: 100px" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="d-flex justify-content-center" style="margin-top: 100px">
           <button on:click={handleLogin} type="submit" class="btn btn-light" style="border-radius: 100px; width: 200px; color: #8385BC">Login</button>
