@@ -9,7 +9,8 @@
   import userImg from '$lib/assets/user.jpg'
   import udangRambutan from '$lib/assets/udang rembutan.jpg'
 
-  let tab = 'buyer'
+  let tab = 'login'
+  let user = ''
   const orders = [
     {
       buyer: 'Endra Arif',
@@ -57,6 +58,13 @@
   function addQuantity(order) {
     order.quantity++
   }
+  function handleLogin() {
+    let email = document.getElementById('exampleInputEmail1').value
+    let arr = email.split('@')
+    console.log(email.split('@'))
+    user = arr[0]
+    tab = 'buyer'
+  }
   function buyerClick() {
     tab = 'buyer'
   }
@@ -65,138 +73,169 @@
   }
 </script>
 <div class="container mt-3">
-  <div class="row mb-1">
-    <div class="col-6">
-      <h1 class="mb-0" style="color: white">UMAI</h1>
-      <span style="font-size: 12px;color: white;">CONFORMTALE EATING</span>
+  {#if tab==='login'}
+    <div class="card px-3" style="margin-top: 40px;background-color: #4B92D4; border: 0">
+      <div class="d-block" style="margin-left: 46px">
+        <h1 class="login-title">UMAI</h1>
+        <span class="login-title" style="font-size: 24px;">COMFORTALE EATING</span>
+      </div>
+      <form class="my-5">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label login-label">Email address</label>
+          <input style="border-radius: 100px" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label  login-label">Password</label>
+          <input style="border-radius: 100px"type="email" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="d-flex justify-content-center" style="margin-top: 100px">
+          <button on:click={handleLogin} type="submit" class="btn btn-light" style="border-radius: 100px; width: 200px; color: #8385BC">Login</button>
+        </div>
+      </form>
     </div>
-    <div class="col-6 d-flex align-items-center" style="justify-content: end; color: white">
-      Welcome Dany!
+  {:else }
+    <div class="row mb-1">
+      <div class="col-6">
+        <h1 class="mb-0" style="color: white">UMAI</h1>
+        <span style="font-size: 12px;color: white;">COMFORTALE EATING</span>
+      </div>
+      <div class="col-6 d-flex align-items-center" style="justify-content: end; color: white">
+        Welcome {user}!
+      </div>
     </div>
-  </div>
-  <div class="row mb-1">
-    <div class="col-6">
-      {#if tab==='join order'}
-      <button on:click={buyerClick} type="button" class="btn btn-close-white" style="border-radius: 100px"><i class='bx bx-chevron-left' ></i>Back</button>
-      {/if}
+    <div class="row mb-1">
+      <div class="col-6">
+        {#if tab==='join order'}
+          <button on:click={buyerClick} type="button" class="btn btn-close-white" style="border-radius: 100px"><i class='bx bx-chevron-left' ></i>Back</button>
+        {/if}
+      </div>
+      <div class="col-6" style="display: flex;justify-content: end">
+        <button on:click={buyerClick} type="button" class="{tab !== 'seller' ? 'btn btn-warning me-1' : 'btn btn-secondary me-1'}" style="border-radius: 100px">Buyer</button>
+        <button on:click={sellerClick} type="button" class="{tab === 'seller' ? 'btn btn-warning' : 'btn btn-secondary'}" style="border-radius: 100px">Seller</button>
+      </div>
     </div>
-    <div class="col-6" style="display: flex;justify-content: end">
-      <button on:click={buyerClick} type="button" class="{tab !== 'seller' ? 'btn btn-warning me-1' : 'btn btn-secondary me-1'}" style="border-radius: 100px">Buyer</button>
-      <button on:click={sellerClick} type="button" class="{tab === 'seller' ? 'btn btn-warning' : 'btn btn-secondary'}" style="border-radius: 100px">Seller</button>
-    </div>
-  </div>
-  {#if tab === 'buyer'}
-    <div class="row">
-      {#each orders as order}
-        <div class="col-sm-12 col-md-6">
-          <div on:click={() => {tab = 'join order'}} class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
+    {#if tab === 'buyer'}
+      <div class="row">
+        {#each orders as order}
+          <div class="col-sm-12 col-md-6">
+            <div on:click={() => {tab = 'join order'}} class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
+              <div class="row">
+                <div class="col-3">
+                  <img class="img-thumbnail" src="{order.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
+                </div>
+                <div class="col-8">
+                  <p class="open-order-label">{order.buyer}</p>
+                  <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Restoran: {order.shop}</p>
+                  <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Tutup order: {order.last_order_at}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/each}
+      </div>
+    {:else if tab === 'join order'}
+      <div class="row">
+        <div class="col-12 d-md-flex justify-content-md-center">
+          <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px; max-width: 500px">
             <div class="row">
               <div class="col-3">
-                <img class="img-thumbnail" src="{order.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
+                <img src="{userImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
               </div>
               <div class="col-8">
-                <p class="open-order-label">{order.buyer}</p>
-                <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Restoran: {order.shop}</p>
-                <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Tutup order: {order.last_order_at}</p>
+                <p class="open-order-label">Dany Muhammad G.</p>
+                <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Restoran: Mie Gacoan</p>
+                <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Tutup order: 14:30</p>
               </div>
             </div>
           </div>
         </div>
-      {/each}
-    </div>
-  {:else if tab === 'join order'}
-    <div class="row">
-      <div class="col-12 d-md-flex justify-content-md-center">
-        <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px; max-width: 500px">
-          <div class="row">
-            <div class="col-3">
-              <img src="{userImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
-            </div>
-            <div class="col-8">
-              <p class="open-order-label">Dany Muhammad G.</p>
-              <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Restoran: Mie Gacoan</p>
-              <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Tutup order: 14:30</p>
-            </div>
-          </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-12 text-center">
+          <button style="border-radius: 100px; border: 1px solid white; width: 200px">Menu Mie Gacoan</button>
         </div>
       </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-12 text-center">
-        <button style="border-radius: 100px; border: 1px solid white; width: 200px">Menu Mie Gacoan</button>
+      <div class="row">
+        {#each menus as item}
+          <div class="col-sm-12 col-md-6">
+            <div class="card p-3 order-list mb-2 d-flex" style="height: 110px; border-radius:8px">
+              <div class="row">
+                <div class="col-3">
+                  <img class="img-thumbnail" src="{item.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
+                </div>
+                <div class="col-8">
+                  <p class="open-order-label">{item.name}</p>
+                  <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
+                  <button on:click={ () => item.quantity > 0 ? item.quantity--:null} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-minus'></i></button>
+                  <input type="number" value="{item.quantity}" style="max-width: 50px">
+                  <button on:click={() => item.quantity++} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-plus'></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/each}
       </div>
-    </div>
-    <div class="row">
-      {#each menus as item}
-        <div class="col-sm-12 col-md-6">
-          <div class="card p-3 order-list mb-2 d-flex" style="height: 110px; border-radius:8px">
+    {:else}
+      <div class="row">
+        <div class="col-12 d-md-flex justify-content-md-center">
+          <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px; max-width: 500px">
             <div class="row">
               <div class="col-3">
-                <img class="img-thumbnail" src="{item.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
+                <img src="{userImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
               </div>
               <div class="col-8">
-                <p class="open-order-label">{item.name}</p>
-                <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
-                <button on:click={ () => item.quantity > 0 ? item.quantity--:null} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-minus'></i></button>
-                <input type="number" value="{item.quantity}" style="max-width: 50px">
-                <button on:click={() => item.quantity++} class="btn btn-sm btn-light" style="border-radius: 100px"><i class='bx bx-plus'></i></button>
+                <p class="open-order-label">Dany Muhammad G.</p>
+                <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Restoran: Mie Gacoan</p>
+                <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Tutup order: 14:30</p>
               </div>
             </div>
           </div>
         </div>
-      {/each}
-    </div>
-  {:else}
-    <div class="row">
-      <div class="col-12 d-md-flex justify-content-md-center">
-        <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px; max-width: 500px">
-          <div class="row">
-            <div class="col-3">
-              <img src="{userImg}" class="img-thumbnail"  alt="Deskripsi Gambar"  height="70" width="70"/>
-            </div>
-            <div class="col-8">
-              <p class="open-order-label">Dany Muhammad G.</p>
-              <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Restoran: Mie Gacoan</p>
-              <p class="open-order-label" style="color: rgba(255, 255, 255, 0.7)">Tutup order: 14:30</p>
-            </div>
-          </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-12 text-center">
+          <button style="border-radius: 100px; border: 1px solid white; width: 200px">Menu Mie Gacoan</button>
         </div>
       </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-12 text-center">
-        <button style="border-radius: 100px; border: 1px solid white; width: 200px">Menu Mie Gacoan</button>
-      </div>
-    </div>
-    <div class="row">
-      {#each orderItems as item}
-        <div class="col-sm-12 col-md-6">
-          <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
-            <div class="row">
-              <div class="col-3">
-                <img class="img-thumbnail" src="{item.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
-              </div>
-              <div class="col-8">
-                <p class="open-order-label">{item.name}</p>
-                <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Jumlah: {item.quantity}x</p>
-                <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
+      <div class="row">
+        {#each orderItems as item}
+          <div class="col-sm-12 col-md-6">
+            <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
+              <div class="row">
+                <div class="col-3">
+                  <img class="img-thumbnail" src="{item.url}" alt="Deskripsi Gambar"  height="70" width="70"/>
+                </div>
+                <div class="col-8">
+                  <p class="open-order-label">{item.name}</p>
+                  <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Jumlah: {item.quantity}x</p>
+                  <p class="open-order-label" style="font-size: 14px;color: rgba(255, 255, 255, 0.7)">Rp {item.price}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      {/each}
-    </div>
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <div class="card order-list mb-2 d-flex" style="padding: 4px;border-radius:8px; width: 200px">
-          <p class="open-order-label" style="font-size: 14px;color: white">3 item</p>
-          <p class="open-order-label" style="font-size: 14px;color: white">Rp 120.000</p>
+        {/each}
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="card order-list mb-2 d-flex" style="padding: 4px;border-radius:8px; width: 200px">
+            <p class="open-order-label" style="font-size: 14px;color: white">3 item</p>
+            <p class="open-order-label" style="font-size: 14px;color: white">Rp 120.000</p>
+          </div>
         </div>
       </div>
-    </div>
+    {/if}
   {/if}
+
 </div>
 <style>
+    .login-label {
+        color: white;
+    }
+    .login-title {
+        color: white;
+        font-size: 80px;
+        margin-bottom: 4px;
+    }
     .brand {
         color: white;
         font-family: Gothic A1;
