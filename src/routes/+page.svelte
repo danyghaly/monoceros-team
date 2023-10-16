@@ -1,4 +1,5 @@
 <script>
+  export let data;
   import thumbnail1 from '$lib/assets/thumbnail-1.jpg'
   import thumbnail2 from '$lib/assets/thumbnail-2.jpg'
   import thumbnail3 from '$lib/assets/thumbnail-3.jpg'
@@ -124,7 +125,7 @@
     {#if tab === 'buyer'}
       <div class="row">
         {#each orders as order}
-          <div class="col-sm-12 col-md-6">
+          <div class="col-sm-12 col-md-12">
             <div on:click={() => {tab = 'join order'}} class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
               <div class="row">
                 <div class="col-3">
@@ -164,7 +165,7 @@
       </div>
       <div class="row">
         {#each menus as item}
-          <div class="col-sm-12 col-md-6">
+          <div class="col-sm-12 col-md-12">
             <div class="card p-3 order-list mb-2 d-flex" style="height: 110px; border-radius:8px">
               <div class="row">
                 <div class="col-3">
@@ -206,7 +207,7 @@
       </div>
       <div class="row">
         {#each menus.filter((menu) => menu.quantity > 0) as item}
-          <div class="col-sm-12 col-md-6">
+          <div class="col-sm-12 col-md-12">
             <div class="card p-3 order-list mb-2 d-flex" style="height: 100px; border-radius:8px">
               <div class="row">
                 <div class="col-3">
